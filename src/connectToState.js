@@ -15,6 +15,8 @@ export const InjectedProps = {
   requiresName: PropTypes.bool,
   requiresCVC: PropTypes.bool,
   requiresPostalCode: PropTypes.bool,
+  onBecomeEmpty: PropTypes.bool,
+  onBecomeValid: PropTypes.bool,
 };
 
 export default function connectToState(CreditCardInput) {
@@ -75,9 +77,9 @@ export default function connectToState(CreditCardInput) {
       const { requiresName, requiresCVC, requiresPostalCode } = this.props;
       return compact([
         "number",
+        requiresName ? "name" : null,
         "expiry",
         requiresCVC ? "cvc" : null,
-        requiresName ? "name" : null,
         requiresPostalCode ? "postalCode" : null,
       ]);
     };
@@ -116,8 +118,8 @@ export default function connectToState(CreditCardInput) {
           {...this.state}
           onFocus={this._onFocus}
           onChange={this._change}
-          onBecomeEmpty={this._focusPreviousField}
-          onBecomeValid={this._focusNextField} />
+          onBecomeEmpty={this.props.onBecomeEmpty ? this._focusPreviousField : undefined}
+          onBecomeValid={this.props.onBecomeValid ? this._focusNextField : undefined} />
       );
     }
   }

@@ -15,8 +15,6 @@ export const InjectedProps = {
   requiresName: PropTypes.bool,
   requiresCVC: PropTypes.bool,
   requiresPostalCode: PropTypes.bool,
-  onBecomeEmpty: PropTypes.bool,
-  onBecomeValid: PropTypes.bool,
 };
 
 export default function connectToState(CreditCardInput) {
@@ -29,6 +27,8 @@ export default function connectToState(CreditCardInput) {
       requiresCVC: PropTypes.bool,
       requiresPostalCode: PropTypes.bool,
       validatePostalCode: PropTypes.func,
+      onBecomeEmpty: PropTypes.bool,
+      onBecomeValid: PropTypes.bool,
     };
 
     static defaultProps = {
@@ -43,6 +43,8 @@ export default function connectToState(CreditCardInput) {
                postalCode.length > 6 ? "invalid" :
                "incomplete";
       },
+      onBecomeEmpty: true,
+      onBecomeValid: true,
     };
 
     constructor() {
@@ -118,8 +120,8 @@ export default function connectToState(CreditCardInput) {
           {...this.state}
           onFocus={this._onFocus}
           onChange={this._change}
-          onBecomeEmpty={this.props.onBecomeEmpty ? this._focusPreviousField : undefined}
-          onBecomeValid={this.props.onBecomeValid ? this._focusNextField : undefined} />
+          onBecomeEmpty={this.props.onBecomeEmpty ? this._focusPreviousField : () => {}}
+          onBecomeValid={this.props.onBecomeValid ? this._focusNextField : () => {}} />
       );
     }
   }

@@ -20,7 +20,7 @@ const s = StyleSheet.create({
     alignItems: "center",
   },
   form: {
-    marginTop: 20,
+    marginTop: 5,
     marginBottom: 20,
   },
   formRow: {
@@ -30,8 +30,8 @@ const s = StyleSheet.create({
   },
   inputContainer: {
     marginLeft: 20,
-    marginTop: 20,
-    marginBottom: 20,
+    marginTop: 5,
+    marginBottom: 5,
   },
   inputLabel: {
     fontWeight: "bold",
@@ -155,12 +155,16 @@ export default class CreditCardInput extends Component {
       cardImageFront, cardImageBack, inputContainerStyle,
       values: { number, expiry, cvc, name, type }, focused, placeholderCardView,
       allowScroll, requiresName, requiresCVC, requiresPostalCode,
-      cardScale, cardFontFamily, cardBrandIcons,
+      cardScale, cardFontFamily, cardBrandIcons, status,
     } = this.props;
+
+    const isValid = status.number && status.expiry && status.cvc &&
+                    (status.number === 'valid') && (status.expiry === 'valid') && (status.cvc === 'valid')
 
     return (
       <View style={s.container}>
         <CreditCard focused={focused}
+          valid={isValid}
           brand={type}
           scale={cardScale}
           fontFamily={cardFontFamily}

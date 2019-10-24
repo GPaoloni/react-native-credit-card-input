@@ -16,6 +16,7 @@ const BASE_SIZE = { width: 300, height: 190 }
 
 const propTypes = {
   focused: PropTypes.string,
+  valid: PropTypes.string,
 
   brand: PropTypes.string,
   name: PropTypes.string,
@@ -50,6 +51,7 @@ const defaultProps = {
 const CardView = props => {
   const {
     focused,
+    valid,
     brand,
     name,
     number,
@@ -66,7 +68,7 @@ const CardView = props => {
 
   const Icons = { ...defaultIcons, ...customIcons }
   const isAmex = brand === 'american-express'
-  const shouldFlip = () => !isAmex && focused === 'cvc'
+  const shouldFlip = () => !isAmex && (focused === 'cvc') && !valid
 
   const containerSize = { ...BASE_SIZE, height: BASE_SIZE.height * scale }
   const transform = {

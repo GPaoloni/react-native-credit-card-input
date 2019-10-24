@@ -27,6 +27,8 @@ export default function connectToState(CreditCardInput) {
       requiresCVC: PropTypes.bool,
       requiresPostalCode: PropTypes.bool,
       validatePostalCode: PropTypes.func,
+      onBecomeEmpty: PropTypes.bool,
+      onBecomeValid: PropTypes.bool,
     };
 
     static defaultProps = {
@@ -41,6 +43,8 @@ export default function connectToState(CreditCardInput) {
                postalCode.length > 6 ? "invalid" :
                "incomplete";
       },
+      onBecomeEmpty: true,
+      onBecomeValid: true,
     };
 
     constructor() {
@@ -75,9 +79,9 @@ export default function connectToState(CreditCardInput) {
       const { requiresName, requiresCVC, requiresPostalCode } = this.props;
       return compact([
         "number",
+        requiresName ? "name" : null,
         "expiry",
         requiresCVC ? "cvc" : null,
-        requiresName ? "name" : null,
         requiresPostalCode ? "postalCode" : null,
       ]);
     };
@@ -116,8 +120,8 @@ export default function connectToState(CreditCardInput) {
           {...this.state}
           onFocus={this._onFocus}
           onChange={this._change}
-          onBecomeEmpty={this._focusPreviousField}
-          onBecomeValid={this._focusNextField} />
+          onBecomeEmpty={this.props.onBecomeEmpty ? this._focusPreviousField : () => {}}
+          onBecomeValid={this.props.onBecomeValid ? this._focusNextField : () => {}} />
       );
     }
   }

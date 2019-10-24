@@ -12,6 +12,7 @@ const styles = StyleSheet.create({
     right: 15,
     width: 60,
     height: 40,
+    resizeMode: 'contain',
   },
   baseText: {
     color: 'rgba(255, 255, 255, 0.8)',

@@ -15,13 +15,16 @@ import CreditCard from "./CardView/CardView";
 import CCInput from "./CCInput";
 import { InjectedProps } from "./connectToState";
 
+const {height} = Dimensions.get('window')
+const xs = height < 640 ? 10 : 20
+
 const s = StyleSheet.create({
   container: {
     alignItems: "center",
   },
   form: {
-    marginTop: 5,
-    marginBottom: 20,
+    marginTop: xs,
+    marginBottom: xs,
   },
   formRow: {
     flexDirection: 'row',
@@ -29,7 +32,7 @@ const s = StyleSheet.create({
     justifyContent: 'space-between'
   },
   inputContainer: {
-    marginLeft: 20,
+    marginLeft: 10,
     marginTop: 5,
     marginBottom: 5,
   },
@@ -101,6 +104,8 @@ export default class CreditCardInput extends Component {
     placeholderColor: "gray",
     allowScroll: false,
     additionalInputsProps: {},
+    onBecomeEmpty: true,
+    onBecomeValid: true,
   };
 
   componentDidMount = () => this._focus(this.props.focused);

@@ -16,7 +16,7 @@ const BASE_SIZE = { width: 300, height: 190 }
 
 const propTypes = {
   focused: PropTypes.string,
-  valid: PropTypes.string,
+  valid: PropTypes.bool,
 
   brand: PropTypes.string,
   name: PropTypes.string,
